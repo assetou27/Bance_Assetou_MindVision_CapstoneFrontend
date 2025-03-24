@@ -1,0 +1,22 @@
+/* Container for the dashboard page layout */
+.dashboard-container {
+    padding: 40px;
+    text-align: center;
+    background-color: #f8f9ff; /* Light background for a clean look */
+    min-height: 100vh;
+  }
+  
+  /* Title styling */
+  .dashboard-container h1 {
+    color: #2e2e80;
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  /* Paragraph styling */
+  .dashboard-container p {
+    font-size: 18px;
+    color: #555;
+  }
+  
+  

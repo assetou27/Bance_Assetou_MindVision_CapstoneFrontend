@@ -1,0 +1,21 @@
+/* Main container for Book a Session page */
+.book-session-container {
+    padding: 40px;
+    text-align: center;
+    background-color: #f0f5ff;
+    min-height: 100vh; /* Full height for a consistent layout */
+  }
+  
+  /* Page Title Styling */
+  .book-session-container h1 {
+    color: #2b2b6e;
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  
+  /* Description styling */
+  .book-session-container p {
+    font-size: 17px;
+    color: #444;
+  }
+  
