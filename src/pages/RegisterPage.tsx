@@ -1,10 +1,12 @@
+// File: src/pages/Register.tsx
+
 import React, { useState } from 'react';
 import axios from 'axios';
-import './styles/Register.css'; // CSS file for styling
+import './styles/Register.css'; // ✅ Your original design
 import { Link } from 'react-router-dom';
 
 const Register: React.FC = () => {
-  // State to store form data
+  // Form data state
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -12,26 +14,36 @@ const Register: React.FC = () => {
     role: 'client',
   });
 
-  // Message to show feedback (success or error)
+  // UI message for success/error
   const [message, setMessage] = useState('');
 
-  // Handle input field changes
+  // Input field handler
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
+  // Submit handler
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      // Send form data to backend
       const res = await axios.post('http://localhost:5000/api/auth/register', formData);
       console.log(res.data);
+
+      // ✅ Extract data correctly from flattened response
+      const { token, role, _id } = res.data;
+
+      // 💾 Save to localStorage
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', role);
+      localStorage.setItem('userId', _id);
+
       setMessage('✅ Registration successful!');
-    } catch (err) {
-      setMessage('❌ Registration failed. Please try again.');
+      window.location.href = '/dashboard';
+    } catch (err: any) {
+      console.error('❌ Registration failed:', err.response?.data || err.message);
+      setMessage(err.response?.data?.message || '❌ Registration failed. Please try again.');
     }
   };
 
@@ -91,7 +103,7 @@ const Register: React.FC = () => {
 
           <button type="submit">Sign Up</button>
 
-          {/* Show feedback message */}
+          {/* Message output */}
           <p className="message">{message}</p>
 
           <p className="link">

@@ -1,51 +1,62 @@
-// File: Login.tsx
+// File: src/pages/Login.tsx
+
 import React, { useState } from 'react';
+import api from '../api/axios'; // ✅ Axios instance to call backend
 import './styles/Login.css';
 
 const Login: React.FC = () => {
-  // Track form input state
+  // Form input states
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // Track and display validation errors
+  // To show error messages if login fails
   const [error, setError] = useState<string | null>(null);
 
-  // Handle login form submission
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  // Handle form submit
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Basic input validation
+    // Simple validation
     if (!email || !password) {
       setError('Email and password are required.');
       return;
     }
 
-    // Clear error if inputs are valid
-    setError(null);
+    setError(null); // Clear previous errors
 
-    // Simulated login action (replace with real API later)
-    console.log('Logging in with:', { email, password });
+    try {
+      // ✅ POST request to your backend
+      const res = await api.post('/auth/login', { email, password });
+
+      const { token, user } = res.data;
+
+      // 💾 Save token and user data in localStorage
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', user.role);
+      localStorage.setItem('userId', user._id);
+
+      // 🔁 Redirect to dashboard on success
+      window.location.href = '/dashboard';
+    } catch (err) {
+      // ❌ Handle error (wrong credentials, network, etc.)
+      setError('Login failed. Please check your credentials.');
+      console.error(err);
+    }
   };
 
   return (
-    // Top-level page layout: 2-column split
     <div className="login-page">
-      {/* Left column: Welcome message, branding */}
+      {/* LEFT: Branding / Welcome */}
       <div className="login-left login-branding">
         <h1 className="welcome-title">
           Welcome to <br /> MindVision <span className="halo">🪐</span>
         </h1>
-
-        <p className="welcome-subtext">
-          Your journey to clarity and confidence starts here.
-        </p>
-
+        <p className="welcome-subtext">Your journey to clarity and confidence starts here.</p>
         <ul className="benefits-list">
           <li>✓ Personal Growth</li>
           <li>✓ 1-on-1 Sessions</li>
           <li>✓ Secure & Confidential</li>
         </ul>
-
         <blockquote className="testimonial">
           <em>"Working with MindVision changed my life!"</em>
           <br />
@@ -53,15 +64,12 @@ const Login: React.FC = () => {
         </blockquote>
       </div>
 
-      {/* Right column: Login form */}
+      {/* RIGHT: Login Form */}
       <div className="login-right">
         <div className="login-container">
-          {/* Title */}
           <h1 className="login-title">Login to MindVision</h1>
 
-          {/* Login form */}
           <form className="login-form" onSubmit={handleSubmit}>
-            {/* Email input */}
             <input
               type="email"
               placeholder="Email address"
@@ -70,7 +78,6 @@ const Login: React.FC = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
 
-            {/* Password input */}
             <input
               type="password"
               placeholder="Password"
@@ -79,16 +86,14 @@ const Login: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            {/* Error message, if any */}
+            {/* Show error if login fails */}
             {error && <div className="login-error">{error}</div>}
 
-            {/* Submit button */}
             <button type="submit" className="login-button">
               Login
             </button>
           </form>
 
-          {/* Link to sign-up page */}
           <p className="signup-text">
             Don’t have an account? <a href="/register">Sign up</a>
           </p>

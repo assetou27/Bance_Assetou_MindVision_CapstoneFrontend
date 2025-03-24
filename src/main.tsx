@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App.tsx';
-import Home from './pages/Home.tsx';
-import Login from './pages/Login.tsx';
-import Register from './pages/Register.tsx';
+import Home from './pages/HomePage.tsx';
+import Login from './pages/LoginPage.tsx';
+import Register from './pages/RegisterPage.tsx';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
