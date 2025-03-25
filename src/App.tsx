@@ -57,4 +57,17 @@ function App() {
   );
 }
 
+
+<Route path="/home" element={<HomePage />} />
+<Route path="/sessions" element={
+  <ProtectedRoute>
+    <SessionListPage />
+  </ProtectedRoute>
+} />
+
+
+<Route path="/about" element={<AboutPage />} />
+<Route path="/sessions" element={<ProtectedRoute><SessionListPage /></ProtectedRoute>} />
+<Route path="/availability" element={<ProtectedRoute><SetAvailability /></ProtectedRoute>} />
+
 export default App;

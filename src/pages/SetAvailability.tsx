@@ -1,31 +1,42 @@
 // src/pages/SetAvailability.tsx
 
 import React, { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import api from "../api/axios";
 import "../styles/Availability.css";
 
 const SetAvailability: React.FC = () => {
-  const [selectedDates, setSelectedDates] = useState<string[]>([]);
+  const [selectedDates, setSelectedDates] = useState<Date[]>([]);
+  const [existingDates, setExistingDates] = useState<string[]>([]);
   const [message, setMessage] = useState("");
 
   const coachId = localStorage.getItem("userId");
 
-  // Add/remove date from selection
-  const toggleDate = (date: string) => {
-    if (selectedDates.includes(date)) {
-      setSelectedDates(selectedDates.filter((d) => d !== date));
-    } else {
-      setSelectedDates([...selectedDates, date]);
-    }
-  };
+  // ⏪ Load saved dates on mount
+  useEffect(() => {
+    if (!coachId) return;
+    const loadExisting = async () => {
+      try {
+        const res = await api.get(`/availability/${coachId}`);
+        const dates = res.data.unavailableDates || [];
+        setExistingDates(dates);
+        setSelectedDates(dates.map((d: string) => new Date(d)));
+      } catch (err) {
+        console.error("Failed to fetch availability", err);
+      }
+    };
+    loadExisting();
+  }, [coachId]);
 
-  // Submit unavailable dates to backend
+  // ✅ Save to backend
   const handleSubmit = async () => {
     if (!coachId) return;
     try {
+      const isoDates = selectedDates.map((d) => d.toISOString().split("T")[0]);
       await api.post("/availability", {
         coachId,
-        unavailableDates: selectedDates,
+        unavailableDates: isoDates,
       });
       setMessage("✅ Availability saved successfully!");
     } catch (err) {
@@ -34,30 +45,28 @@ const SetAvailability: React.FC = () => {
     }
   };
 
-  // Render a few hardcoded date buttons for demo
-  const demoDates = [
-    "2025-03-25",
-    "2025-03-26",
-    "2025-03-27",
-    "2025-03-28",
-    "2025-03-29",
-  ];
-
   return (
     <div className="availability-container">
       <h2>Set Your Unavailable Dates</h2>
 
-      <div className="date-grid">
-        {demoDates.map((date) => (
-          <button
-            key={date}
-            className={selectedDates.includes(date) ? "selected" : ""}
-            onClick={() => toggleDate(date)}
-          >
-            {date}
-          </button>
-        ))}
-      </div>
+      <DatePicker
+        selected={null}
+        onChange={(date: Date) => {
+          if (!date) return;
+          const exists = selectedDates.find(
+            (d) => d.toDateString() === date.toDateString()
+          );
+          if (exists) {
+            setSelectedDates(selectedDates.filter(
+              (d) => d.toDateString() !== date.toDateString()
+            ));
+          } else {
+            setSelectedDates([...selectedDates, date]);
+          }
+        }}
+        inline
+        highlightDates={selectedDates}
+      />
 
       <button className="save-button" onClick={handleSubmit}>
         Save Availability
