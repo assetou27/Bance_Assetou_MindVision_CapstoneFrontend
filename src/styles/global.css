@@ -1,0 +1,25 @@
+/* src/styles/global.css */
+
+/* Basic reset and global font styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  /* Remove underline from links and use inherited color */
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Style for error messages */
+  .error {
+    color: red;
+  }
+  
+  /* Style for success messages */
+  .success {
+    color: green;
+  }
+  

@@ -1,284 +1,126 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import AuthContext from '../context/AuthContext';
-import Alert from '../components/common/Alert';
-import Button from '../components/common/Button';
+// src/pages/Register.tsx
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import '../styles/Register.css'; // Your custom CSS design for the register page
+import { UserContext } from '../hooks/UserContext';
 
 /**
  * Register Component
- * Handles user registration with name, email, and password
+ * ------------------
+ * This component renders the registration form with a two-panel layout.
+ * The left panel contains branding and feature information, while the right panel 
+ * contains the form where a user can register.
+ *
+ * When the form is submitted, it calls the register function from UserContext.
+ * Upon successful registration, it fetches the full user info via GET /api/auth/me,
+ * stores the data (including the JWT token) in the context, and redirects the user
+ * to the dashboard.
  */
 const Register: React.FC = () => {
-  // Get auth context
-  const { register, error: authError, isAuthenticated } = useContext(AuthContext);
-  
-  // For redirecting after registration
-  const navigate = useNavigate();
-  
-  // Get query parameters (for redirect after registration)
-  const [searchParams] = useSearchParams();
-  const redirectPath = searchParams.get('redirect') || '/dashboard';
-  
-  // Form state
+  // Local state to manage form data
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    role: 'client',
   });
   
-  // Loading state
-  const [loading, setLoading] = useState(false);
+  // Local state for displaying success/error messages to the user
+  const [message, setMessage] = useState<string>('');
   
-  // Form error state
-  const [error, setError] = useState<string | null>(null);
+  // Get the register function from the global UserContext
+  const { register } = useContext(UserContext);
+  // useNavigate hook to programmatically navigate to a different route after registration
+  const navigate = useNavigate();
 
-  /**
-   * Check if user is already logged in, redirect if they are
-   */
-  useEffect(() => {
-    if (isAuthenticated()) {
-      navigate(redirectPath);
-    }
-  }, [isAuthenticated, navigate, redirectPath]);
-
-  /**
-   * Handle input changes in the form
-   * 
-   * @param {React.ChangeEvent<HTMLInputElement>} e - Change event
-   */
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    
-    // Update form data
-    setFormData(prevData => ({
-      ...prevData,
-      [name]: value
-    }));
-    
-    // Clear error when user types
-    setError(null);
+  // Handle input changes by updating the formData state
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  /**
-   * Validate the form data
-   * 
-   * @returns {boolean} True if form is valid, false otherwise
-   */
-  const validateForm = (): boolean => {
-    // Check if all fields are filled
-    if (!formData.firstName || !formData.lastName || !formData.email || !formData.password || !formData.confirmPassword) {
-      setError('All fields are required');
-      return false;
-    }
-    
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      setError('Please enter a valid email address');
-      return false;
-    }
-    
-    // Validate password length
-    if (formData.password.length < 8) {
-      setError('Password must be at least 8 characters long');
-      return false;
-    }
-    
-    // Check if passwords match
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
-      return false;
-    }
-    
-    return true;
-  };
-
-  /**
-   * Handle form submission
-   * 
-   * @param {React.FormEvent} e - Form submit event
-   */
+  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Validate form
-    if (!validateForm()) {
-      return;
-    }
-    
     try {
-      setLoading(true);
-      
-      // Attempt to register
-      await register({
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        password: formData.password
-      });
-      
-      // Check if there's a pending booking in session storage
-      const pendingBooking = sessionStorage.getItem('pendingBooking');
-      if (pendingBooking && redirectPath === '/booking') {
-        // Clear the pending booking
-        sessionStorage.removeItem('pendingBooking');
-      }
-      
-      // Redirect after successful registration
-      navigate(redirectPath);
+      // Call the register function from context, which performs the registration 
+      // and immediately fetches the user info via GET /api/auth/me.
+      await register(formData.name, formData.email, formData.password);
+      // If registration is successful, update the message state
+      setMessage('✅ Registration successful!');
+      // Redirect the user to the dashboard (or home) page
+      navigate('/dashboard');
     } catch (err: any) {
-      // Handle registration error
-      setError(err.message || 'Registration failed. Please try again.');
-      console.error('Registration error:', err);
-    } finally {
-      setLoading(false);
+      console.error('❌ Registration failed:', err.response?.data || err.message);
+      // Display the error message from the backend, if available
+      setMessage(err.response?.data?.msg || '❌ Registration failed. Please try again.');
     }
   };
 
   return (
     <div className="register-page">
-      <div className="auth-container">
-        <div className="auth-card">
-          <div className="auth-header">
-            <h1 className="auth-title">Create Account</h1>
-            <p className="auth-subtitle">
-              Join MindVision Coaching to book sessions and access personalized resources.
-            </p>
-          </div>
-          
-          {/* Error Alert */}
-          {(error || authError) && (
-            <Alert type="error" dismissible>
-              {error || authError}
-            </Alert>
-          )}
-          
-          {/* Registration Form */}
-          <form className="auth-form" onSubmit={handleSubmit}>
-            {/* Name Fields */}
-            <div className="form-row">
-              <div className="form-group form-group-half">
-                <label htmlFor="firstName" className="form-label">First Name</label>
-                <input
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  className="form-control"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  placeholder="John"
-                  required
-                />
-              </div>
-              <div className="form-group form-group-half">
-                <label htmlFor="lastName" className="form-label">Last Name</label>
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  className="form-control"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  placeholder="Doe"
-                  required
-                />
-              </div>
-            </div>
-            
-            {/* Email Field */}
-            <div className="form-group">
-              <label htmlFor="email" className="form-label">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="form-control"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="your@email.com"
-                required
-              />
-            </div>
-            
-            {/* Password Field */}
-            <div className="form-group">
-              <label htmlFor="password" className="form-label">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                className="form-control"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="••••••••"
-                required
-              />
-              <small className="form-text">Password must be at least 8 characters long</small>
-            </div>
-            
-            {/* Confirm Password Field */}
-            <div className="form-group">
-              <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-              <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                className="form-control"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                placeholder="••••••••"
-                required
-              />
-            </div>
-            
-            {/* Terms and Conditions */}
-            <div className="form-group">
-              <div className="checkbox-group">
-                <input
-                  type="checkbox"
-                  id="termsAgree"
-                  name="termsAgree"
-                  required
-                />
-                <label htmlFor="termsAgree">
-                  I agree to the{' '}
-                  <Link to="/terms" target="_blank" rel="noopener noreferrer">
-                    Terms of Service
-                  </Link>{' '}
-                  and{' '}
-                  <Link to="/privacy" target="_blank" rel="noopener noreferrer">
-                    Privacy Policy
-                  </Link>
-                </label>
-              </div>
-            </div>
-            
-            {/* Submit Button */}
-            <div className="form-actions">
-              <Button
-                type="submit"
-                variant="primary"
-                loading={loading}
-                disabled={loading}
-                fullWidth
-              >
-                {loading ? 'Creating Account...' : 'Sign Up'}
-              </Button>
-            </div>
-          </form>
-          
-          {/* Login Link */}
-          <div className="auth-footer">
-            <p>
-              Already have an account?{' '}
-              <Link to={`/login${searchParams.toString() ? `?${searchParams.toString()}` : ''}`}>
-                Log In
-              </Link>
-            </p>
-          </div>
+      {/* Left Panel: Branding and Features */}
+      <div className="left-panel">
+        <h1>Welcome to MindVision 💫</h1>
+        <p>Your journey to clarity and confidence starts here.</p>
+        <div className="feature-list">
+          <p>✔ Personal Growth</p>
+          <p>✔ 1-on-1 Sessions</p>
+          <p>✔ Secure & Confidential</p>
         </div>
+        <div className="testimonial">
+          <em>"Working with MindVision changed my life!"</em>
+          <p>- A grateful client 💜</p>
+        </div>
+      </div>
+
+      {/* Right Panel: Registration Form */}
+      <div className="right-panel">
+        <form className="register-form" onSubmit={handleSubmit}>
+          <h2>Create Your Account</h2>
+
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Create Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+
+          <select name="role" value={formData.role} onChange={handleChange}>
+            <option value="client">Client</option>
+            <option value="coach">Coach</option>
+          </select>
+
+          <button type="submit">Sign Up</button>
+
+          {/* Display success or error message */}
+          <p className="message">{message}</p>
+
+          <p className="link">
+            Already have an account? <Link to="/login">Log in</Link>
+          </p>
+        </form>
       </div>
     </div>
   );

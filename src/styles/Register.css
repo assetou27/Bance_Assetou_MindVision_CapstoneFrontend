@@ -1,0 +1,96 @@
+/* src/styles/Register.css */
+
+/* Full-page layout with two panels: left for branding, right for the registration form */
+.register-page {
+  display: flex;               /* Use Flexbox to create side-by-side panels */
+  height: 100vh;               /* Full viewport height */
+  font-family: 'Segoe UI', sans-serif; /* Page font */
+}
+
+/* Left panel: contains welcome content, features, and testimonial */
+.left-panel {
+  flex: 1;                     /* Occupies half the width */
+  background-color: #f5f5fa;   /* Light background color */
+  padding: 60px;               /* Spacing around content */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;     /* Vertically center content */
+  color: #333;                 /* Dark text color */
+}
+
+/* Feature list styling in the left panel */
+.feature-list {
+  margin: 20px 0;              /* Vertical spacing */
+  line-height: 1.6;            /* Increased line spacing for readability */
+}
+
+/* Testimonial styling */
+.testimonial {
+  margin-top: 30px;            /* Space above testimonial */
+  font-style: italic;          /* Italic text style */
+  color: #666;                 /* Medium gray color */
+}
+
+/* Right panel: contains the registration form */
+.right-panel {
+  flex: 1;                     /* Occupies the other half of the width */
+  display: flex;
+  justify-content: center;     /* Center the form horizontally */
+  align-items: center;         /* Center the form vertically */
+  padding: 60px;
+  background-color: #ffffff;   /* White background for contrast */
+}
+
+/* Form container styling */
+.register-form {
+  width: 100%;
+  max-width: 400px;            /* Limit maximum form width */
+  display: flex;
+  flex-direction: column;      /* Stack form elements vertically */
+}
+
+/* Form title styling */
+.register-form h2 {
+  margin-bottom: 20px;         /* Space below the title */
+  color: #222;                 /* Dark text for the title */
+}
+
+/* Input fields and select dropdown styling */
+.register-form input,
+.register-form select {
+  margin-bottom: 15px;         /* Space between form elements */
+  padding: 12px;               /* Padding inside each input */
+  border: 1px solid #ccc;      /* Light gray border */
+  border-radius: 6px;          /* Rounded corners */
+  font-size: 16px;             /* Set font size */
+}
+
+/* Submit button styling */
+.register-form button {
+  background-color: #6a47d4;   /* Purple background */
+  color: white;                /* White text */
+  border: none;                /* No border */
+  padding: 12px;               /* Padding for the button */
+  font-size: 16px;             /* Font size */
+  border-radius: 6px;          /* Rounded corners */
+  cursor: pointer;             /* Cursor changes to pointer on hover */
+  transition: background-color 0.2s ease; /* Smooth background transition */
+}
+
+/* Button hover effect */
+.register-form button:hover {
+  background-color: #593bb6;   /* Darker purple on hover */
+}
+
+/* Message styling for success or error feedback */
+.message {
+  margin-top: 10px;
+  color: green;                /* Green text for success messages */
+}
+
+/* Link styling below the form */
+.link {
+  margin-top: 16px;
+  text-align: center;          /* Center the link text */
+  font-size: 14px;             /* Smaller font size */
+}

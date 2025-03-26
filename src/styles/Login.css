@@ -1,0 +1,150 @@
+/* src/styles/Login.css */
+
+/* Full-page layout for the login page */
+.login-page {
+  display: flex;               /* Create two side-by-side panels */
+  min-height: 100vh;           /* Full viewport height */
+  background-color: #f9f9ff;   /* Light background color */
+}
+
+/* LEFT PANEL: Branding / Welcome Content */
+.login-left {
+  flex: 1;                     /* Take up half the width */
+  padding: 4rem 3rem;          /* Spacing inside the panel */
+  background-color: #f4f3ff;   /* Light purple background for contrast */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;     /* Center content vertically */
+  align-items: center;         /* Center content horizontally */
+  text-align: left;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* RIGHT PANEL: Login Form Container */
+.login-right {
+  flex: 1;                     /* Take up the remaining half */
+  padding: 4rem 3rem;          /* Spacing inside the panel */
+  background-color: #f4f3ff;   /* Consistent background with left panel */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Login box styling */
+.login-container {
+  width: 100%;
+  max-width: 380px;            /* Limit maximum width */
+  background-color: #fff;      /* White background for the form */
+  padding: 2rem;               /* Spacing inside the form */
+  border-radius: 12px;         /* Rounded corners */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+}
+
+/* Form title styling */
+.login-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+/* Form layout */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;                 /* Space between input fields */
+}
+
+/* Input fields styling */
+.login-input {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Submit button styling */
+.login-button {
+  padding: 0.75rem;
+  background-color: #6c5ce7;   /* Purple background */
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s; /* Smooth background transition */
+}
+
+.login-button:hover {
+  background-color: #574b90;   /* Darker purple on hover */
+}
+
+/* Error message styling */
+.login-error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Signup link styling */
+.signup-text {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.signup-text a {
+  color: #6c5ce7;
+  text-decoration: none;
+}
+
+/* Additional branding styles for the left panel */
+.welcome-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #222;
+  margin-bottom: 1rem;
+}
+
+.welcome-subtext {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.benefits-list li {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.testimonial {
+  font-style: italic;
+  color: #555;
+}
+
+.client-credit {
+  margin-top: 0.5rem;
+  font-style: normal;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* Animated halo for branding (if used) */
+.halo {
+  display: inline-block;
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}

@@ -1,0 +1,58 @@
+/* src/styles/AddAppointment.css */
+
+/* Container for the add appointment page */
+.add-appointment-page {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .add-appointment-page h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #222;
+  }
+  
+  .message {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    color: green;
+  }
+  
+  /* Appointment form styling */
+  .appointment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .appointment-form label {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .appointment-form input,
+  .appointment-form textarea {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  
+  .appointment-form button {
+    padding: 0.75rem;
+    background-color: #6c5ce7;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .appointment-form button:hover {
+    background-color: #574b90;
+  }
+  

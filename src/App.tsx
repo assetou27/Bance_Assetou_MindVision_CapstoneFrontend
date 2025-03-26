@@ -1,64 +1,41 @@
+// src/App.tsx
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import PrivateRoute from './components/layout/PrivateRoute';
+// BrowserRouter is used to enable routing using the HTML5 History API.
+// It wraps your entire application so that navigation between pages happens on the client side.
+import { BrowserRouter } from 'react-router-dom';
 
-// Layout Components
-import Navigation from './components/layout/Navigation';
-import Footer from './components/layout/Footer';
+// Import your custom routes component (renamed as AppRoutes) which defines all the application routes.
+import AppRoutes from './routes';
 
-// Page Components
-import Home from './pages/Home';
-import Services from './pages/Services';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import Booking from './pages/Booking';
-import Dashboard from './pages/Dashboard';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import About from './pages/About';
+// Import the Navbar component that displays the navigation bar on every page.
+import Navbar from './components/Navbar';
+
+// Import the UserProvider from your authentication context.
+// UserProvider makes authentication data (e.g., current user, login/logout functions) available to all components in the app.
+import { UserProvider } from './hooks/UserContext';
 
 /**
- * Main App component that sets up routing and authentication
- * Wraps the entire application in the AuthProvider for global auth state
- * Sets up all main routes for the MindVision coaching application
+ * App Component
+ * -------------
+ * This is the root component of your application.
+ * 
+ * It wraps the entire app with:
+ *   - BrowserRouter: Enables client-side routing.
+ *   - UserProvider: Provides global authentication state and functions.
+ *   - Navbar: Displays the navigation bar on every page.
+ *   - AppRoutes: Renders the appropriate page based on the current URL.
  */
-const App = () => {
+export default function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <div className="app-container">
-          {/* Global Navigation */}
-          <Navigation />
-          
-          {/* Main Content Area */}
-          <main className="main-content">
-            <Routes>
-              {/* Public Routes */}
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:id" element={<BlogPost />} />
-              <Route path="/booking" element={<Booking />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              
-              {/* Protected Routes - Require Authentication */}
-              <Route path="/dashboard" element={
-                <PrivateRoute>
-                  <Dashboard />
-                </PrivateRoute>
-              } />
-            </Routes>
-          </main>
-          
-          {/* Global Footer */}
-          <Footer />
-        </div>
-      </Router>
-    </AuthProvider>
+    // BrowserRouter ensures that your app can use the routing features provided by react-router-dom.
+    <BrowserRouter>
+      {/* UserProvider makes the authentication state (user data, login/logout functions) available to all nested components */}
+      <UserProvider>
+        {/* Navbar is placed outside the routes so that it appears on every page */}
+        <Navbar />
+        {/* AppRoutes contains the Route definitions and displays the appropriate page for each URL */}
+        <AppRoutes />
+      </UserProvider>
+    </BrowserRouter>
   );
-};
-
-export default App;
+}

@@ -1,0 +1,316 @@
+/* src/styles/Home.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
+
+:root {
+  --primary: #3a6ea5;
+  --secondary: #004e98;
+  --accent: #ff6b6b;
+  --light: #f8f9fa;
+  --dark: #343a40;
+  --text: #212529;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--light);
+}
+
+/* Home Container */
+.home-container {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero-section {
+  min-height: 100vh;
+  padding: 80px 5% 40px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(0,78,152,0.05) 0%, rgba(58,110,165,0.1) 100%);
+}
+
+.hero-content {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero-text {
+  flex: 1;
+  padding-right: 2rem;
+}
+
+.hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--secondary);
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+.cta-button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+  background-color: var(--secondary);
+}
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-circle {
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 8px solid white;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  background-color: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-placeholder {
+  font-size: 8rem;
+  color: #adb5bd;
+  font-style: normal;
+}
+
+/* About Section */
+.about-section {
+  padding: 5rem 5%;
+  background-color: white;
+}
+
+.about-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--secondary);
+}
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-text p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+/* Quote Section */
+.quote-section {
+  padding: 5rem 5%;
+  background-color: rgb(131, 60, 163);
+  color: white;
+  text-align: center;
+}
+
+.quote {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.quote p {
+  margin-bottom: 1rem;
+}
+
+.quote footer {
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.loading {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.error {
+  color: var(--accent);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.refresh-quote {
+  background-color: rgba(34, 88, 211, 0.2);
+  color: white;
+  border: 2px solid white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.refresh-quote:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Coaching Approach */
+.coaching-approach {
+  padding: 5rem 5%;
+  background-color: var(--light);
+}
+
+.coaching-approach h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--secondary);
+}
+
+.approach-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.approach-card {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 350px;
+  padding: 2rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.approach-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.card-icon {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.approach-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+  text-align: center;
+}
+
+.approach-card p {
+  text-align: center;
+}
+
+/* CTA Section */
+.cta-section {
+  padding: 5rem 5%;
+  text-align: center;
+  background-color: white;
+}
+
+.cta-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--secondary);
+}
+
+.cta-section p {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  font-size: 1.2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .hero-content {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  
+  .hero-text {
+    padding-right: 0;
+    margin-top: 2rem;
+  }
+  
+  .hero-subtitle {
+    margin: 0 auto 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-text h1 {
+    font-size: 2.5rem;
+  }
+  
+  .profile-circle {
+    width: 280px;
+    height: 280px;
+  }
+  
+  .quote {
+    font-size: 1.5rem;
+  }
+  
+  .about-section h2,
+  .coaching-approach h2,
+  .cta-section h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .profile-circle {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .profile-placeholder {
+    font-size: 6rem;
+  }
+  
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+  
+  .approach-card {
+    max-width: 100%;
+  }
+}

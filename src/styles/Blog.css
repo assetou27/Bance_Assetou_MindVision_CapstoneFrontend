@@ -1,0 +1,50 @@
+/* src/styles/Blog.css */
+
+/* Main container for the Blog page */
+.blog-page {
+    max-width: 800px;               /* Limit content width */
+    margin: 0 auto;                 /* Center horizontally */
+    padding: 2rem;                  /* Spacing around content */
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  /* Page title styling */
+  .blog-page h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #222;
+  }
+  
+  /* Error message styling */
+  .error {
+    color: red;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  /* Grid container for the list of blog posts */
+  .blog-list {
+    display: grid;
+    gap: 1.5rem;                    /* Space between blog cards */
+  }
+  
+  /* Individual blog card styling */
+  .blog-card {
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 1rem;
+  }
+  
+  /* Blog card title styling */
+  .blog-card h2 {
+    margin: 0 0 0.5rem;
+    color: #333;
+  }
+  
+  /* Blog card text styling */
+  .blog-card p {
+    margin: 0.5rem 0;
+    color: #555;
+  }
+  

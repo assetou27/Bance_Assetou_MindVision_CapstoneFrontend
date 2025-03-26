@@ -1,0 +1,64 @@
+/* src/styles/Appointments.css */
+
+/* Container for the appointments page */
+.appointments-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .appointments-page h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #222;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  /* Button to add a new appointment */
+  .add-appointment-btn {
+    display: block;
+    margin: 0 auto 2rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #6c5ce7;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+  
+  .add-appointment-btn:hover {
+    background-color: #574b90;
+  }
+  
+  /* List of appointments */
+  .appointments-list {
+    display: grid;
+    gap: 1rem;
+  }
+  
+  /* Individual appointment card styling */
+  .appointment-card {
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 1rem;
+  }
+  
+  .appointment-card h2 {
+    margin: 0 0 0.5rem;
+    color: #333;
+  }
+  
+  .appointment-card p {
+    margin: 0;
+    color: #555;
+  }
+  

@@ -1,0 +1,51 @@
+/* src/styles/Services.css */
+
+/* Main container for the Services page */
+.services-page {
+    max-width: 800px;               /* Limit the content width */
+    margin: 0 auto;                 /* Center horizontally */
+    padding: 2rem;                  /* Spacing around content */
+    font-family: 'Segoe UI', sans-serif; /* Basic font */
+  }
+  
+  /* Page title styling */
+  .services-page h1 {
+    text-align: center;             /* Center the page title */
+    margin-bottom: 1.5rem;          /* Space below the title */
+    color: #222;                    /* Dark text color */
+  }
+  
+  /* Error message styling */
+  .error {
+    color: red;                     /* Red text for errors */
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  /* Container for the list of services (grid layout) */
+  .services-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;                    /* Spacing between service cards */
+  }
+  
+  /* Individual service card styling */
+  .service-card {
+    background-color: #fff;         /* White background */
+    border-radius: 6px;            /* Slightly rounded corners */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Subtle shadow */
+    padding: 1rem;                  /* Spacing inside the card */
+  }
+  
+  /* Service card title styling */
+  .service-card h2 {
+    margin: 0 0 0.5rem;
+    color: #333;
+  }
+  
+  /* Service card text styling */
+  .service-card p {
+    margin: 0.5rem 0;
+    color: #555;
+  }
+  

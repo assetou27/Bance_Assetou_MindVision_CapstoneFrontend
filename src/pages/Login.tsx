@@ -1,178 +1,107 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import AuthContext from '../context/AuthContext';
-import Alert from '../components/common/Alert';
-import Button from '../components/common/Button';
+// src/pages/Login.tsx
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from '../hooks/UserContext';
+import '../styles/Login.css'; // Import your custom CSS design
 
 /**
  * Login Component
- * Handles user authentication with email/password
+ * ----------------
+ * This component renders a two-panel layout:
+ * - Left Panel: Branding and welcome message.
+ * - Right Panel: Login form.
+ *
+ * It uses the global UserContext to call the login function. Upon successful login,
+ * it redirects the user to the dashboard (or home). Errors are displayed if login fails.
  */
 const Login: React.FC = () => {
-  // Get auth context
-  const { login, error: authError, isAuthenticated } = useContext(AuthContext);
-  
-  // For redirecting after login
+  // Retrieve the login function from UserContext
+  const { login } = useContext(UserContext);
+  // useNavigate allows for programmatic redirection
   const navigate = useNavigate();
-  
-  // Get query parameters (for redirect after login)
-  const [searchParams] = useSearchParams();
-  const redirectPath = searchParams.get('redirect') || '/dashboard';
-  
-  // Form state
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
-  
-  // Loading state
-  const [loading, setLoading] = useState(false);
-  
-  // Form error state
+
+  // Local state for email and password input fields
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  // Local state to hold error messages if login fails
   const [error, setError] = useState<string | null>(null);
 
-  /**
-   * Check if user is already logged in, redirect if they are
-   */
-  useEffect(() => {
-    if (isAuthenticated()) {
-      navigate(redirectPath);
-    }
-  }, [isAuthenticated, navigate, redirectPath]);
-
-  /**
-   * Handle input changes in the form
-   * 
-   * @param {React.ChangeEvent<HTMLInputElement>} e - Change event
-   */
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    
-    // Update form data
-    setFormData(prevData => ({
-      ...prevData,
-      [name]: value
-    }));
-    
-    // Clear error when user types
-    setError(null);
-  };
-
-  /**
-   * Handle form submission
-   * 
-   * @param {React.FormEvent} e - Form submit event
-   */
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Basic validation
-    if (!formData.email || !formData.password) {
-      setError('Please enter both email and password');
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent page reload on form submit
+    if (!email || !password) {
+      setError('Email and password are required.');
       return;
     }
-    
+    setError(null);
     try {
-      setLoading(true);
-      
-      // Attempt to log in
-      await login(formData.email, formData.password);
-      
-      // Check if there's a pending booking in session storage
-      const pendingBooking = sessionStorage.getItem('pendingBooking');
-      if (pendingBooking && redirectPath === '/booking') {
-        // Clear the pending booking
-        sessionStorage.removeItem('pendingBooking');
-      }
-      
-      // Redirect after successful login
-      navigate(redirectPath);
-    } catch (err) {
-      // Handle login error
-      setError('Invalid email or password. Please try again.');
-      console.error('Login error:', err);
-    } finally {
-      setLoading(false);
+      // Call the login function from context
+      await login(email, password);
+      // On successful login, redirect to the dashboard (or home page)
+      navigate('/dashboard');
+    } catch (err: any) {
+      // Capture and display the error message if login fails
+      setError(err.message);
+      console.error("Login error:", err);
     }
   };
 
   return (
     <div className="login-page">
-      <div className="auth-container">
-        <div className="auth-card">
-          <div className="auth-header">
-            <h1 className="auth-title">Log In</h1>
-            <p className="auth-subtitle">
-              Welcome back! Log in to access your dashboard and manage your coaching sessions.
-            </p>
-          </div>
-          
-          {/* Error Alert */}
-          {(error || authError) && (
-            <Alert type="error" dismissible>
-              {error || authError}
-            </Alert>
-          )}
-          
-          {/* Login Form */}
-          <form className="auth-form" onSubmit={handleSubmit}>
-            {/* Email Field */}
-            <div className="form-group">
-              <label htmlFor="email" className="form-label">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="form-control"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="your@email.com"
-                required
-              />
-            </div>
-            
-            {/* Password Field */}
-            <div className="form-group">
-              <label htmlFor="password" className="form-label">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                className="form-control"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="••••••••"
-                required
-              />
-              {/* Password Reset Link */}
-              <div className="password-reset-link">
-                <Link to="/forgot-password">Forgot password?</Link>
-              </div>
-            </div>
-            
+      {/* LEFT PANEL: Branding and Welcome Information */}
+      <div className="login-left login-branding">
+        <h1 className="welcome-title">
+          Welcome to <br /> MindVision <span className="halo">🪐</span>
+        </h1>
+        <p className="welcome-subtext">
+          Your journey to clarity and confidence starts here.
+        </p>
+        <ul className="benefits-list">
+          <li>✓ Personal Growth</li>
+          <li>✓ 1-on-1 Sessions</li>
+          <li>✓ Secure & Confidential</li>
+        </ul>
+        <blockquote className="testimonial">
+          <em>"Working with MindVision changed my life!"</em>
+          <br />
+          <span className="client-credit">- A grateful client 💜</span>
+        </blockquote>
+      </div>
+
+      {/* RIGHT PANEL: Login Form */}
+      <div className="login-right">
+        <div className="login-container">
+          <h1 className="login-title">Login to MindVision</h1>
+          <form className="login-form" onSubmit={handleSubmit}>
+            {/* Email Input */}
+            <input
+              type="email"
+              placeholder="Email address"
+              className="login-input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            {/* Password Input */}
+            <input
+              type="password"
+              placeholder="Password"
+              className="login-input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            {/* Display error if login fails */}
+            {error && <div className="login-error">{error}</div>}
             {/* Submit Button */}
-            <div className="form-actions">
-              <Button
-                type="submit"
-                variant="primary"
-                loading={loading}
-                disabled={loading}
-                fullWidth
-              >
-                {loading ? 'Logging in...' : 'Log In'}
-              </Button>
-            </div>
+            <button type="submit" className="login-button">
+              Login
+            </button>
           </form>
-          
-          {/* Registration Link */}
-          <div className="auth-footer">
-            <p>
-              Don't have an account?{' '}
-              <Link to={`/register${searchParams.toString() ? `?${searchParams.toString()}` : ''}`}>
-                Sign Up
-              </Link>
-            </p>
-          </div>
+          {/* Link to the Register page */}
+          <p className="signup-text">
+            Don't have an account? <Link to="/register">Sign up</Link>
+          </p>
         </div>
       </div>
     </div>
