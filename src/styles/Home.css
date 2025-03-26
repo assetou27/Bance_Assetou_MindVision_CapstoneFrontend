@@ -1,4 +1,3 @@
-/* src/styles/Home.css */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
 
 :root {
@@ -23,12 +22,10 @@ body {
   background-color: var(--light);
 }
 
-/* Home Container */
 .home-container {
   width: 100%;
 }
 
-/* Hero Section */
 .hero-section {
   min-height: 100vh;
   padding: 80px 5% 40px;
@@ -99,13 +96,12 @@ body {
   justify-content: center;
 }
 
-.profile-placeholder {
-  font-size: 8rem;
-  color: #adb5bd;
-  font-style: normal;
+.profile-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* About Section */
 .about-section {
   padding: 5rem 5%;
   background-color: white;
@@ -129,7 +125,6 @@ body {
   font-size: 1.1rem;
 }
 
-/* Quote Section */
 .quote-section {
   padding: 5rem 5%;
   background-color: rgb(131, 60, 163);
@@ -180,137 +175,4 @@ body {
 
 .refresh-quote:hover {
   background-color: rgba(255, 255, 255, 0.3);
-}
-
-/* Coaching Approach */
-.coaching-approach {
-  padding: 5rem 5%;
-  background-color: var(--light);
-}
-
-.coaching-approach h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  text-align: center;
-  margin-bottom: 3rem;
-  color: var(--secondary);
-}
-
-.approach-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.approach-card {
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  width: 100%;
-  max-width: 350px;
-  padding: 2rem;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.approach-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-}
-
-.card-icon {
-  font-size: 3rem;
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.approach-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--primary);
-  text-align: center;
-}
-
-.approach-card p {
-  text-align: center;
-}
-
-/* CTA Section */
-.cta-section {
-  padding: 5rem 5%;
-  text-align: center;
-  background-color: white;
-}
-
-.cta-section h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: var(--secondary);
-}
-
-.cta-section p {
-  max-width: 600px;
-  margin: 0 auto 2rem;
-  font-size: 1.2rem;
-}
-
-/* Responsive Design */
-@media (max-width: 992px) {
-  .hero-content {
-    flex-direction: column-reverse;
-    text-align: center;
-  }
-  
-  .hero-text {
-    padding-right: 0;
-    margin-top: 2rem;
-  }
-  
-  .hero-subtitle {
-    margin: 0 auto 2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-text h1 {
-    font-size: 2.5rem;
-  }
-  
-  .profile-circle {
-    width: 280px;
-    height: 280px;
-  }
-  
-  .quote {
-    font-size: 1.5rem;
-  }
-  
-  .about-section h2,
-  .coaching-approach h2,
-  .cta-section h2 {
-    font-size: 2rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .profile-circle {
-    width: 220px;
-    height: 220px;
-  }
-  
-  .profile-placeholder {
-    font-size: 6rem;
-  }
-  
-  .hero-text h1 {
-    font-size: 2rem;
-  }
-  
-  .approach-card {
-    max-width: 100%;
-  }
 }

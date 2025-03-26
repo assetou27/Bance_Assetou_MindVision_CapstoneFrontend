@@ -1,8 +1,12 @@
 // src/routes.tsx
+
+// Importing React library
 import React from 'react';
+
+// Importing routing components from react-router-dom
 import { Routes, Route } from 'react-router-dom';
 
-// Import page components
+// Importing individual page components
 import Home from './pages/Home';
 import Services from './pages/Services';
 import Blog from './pages/Blog';
@@ -11,33 +15,30 @@ import AddAppointment from './pages/AddAppointment';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
-/**
- * AppRoutes Component
- * Sets up the routing for the application using React Router v6.
- */
+// Main routing component defining all application routes
 export default function AppRoutes() {
   return (
     <Routes>
-      {/* Render Home component at the root URL */}
+      {/* Route for Home page */}
       <Route path="/" element={<Home />} />
 
-      {/* Render Services component at /services */}
+      {/* Route for Services page */}
       <Route path="/services" element={<Services />} />
 
-      {/* Render Blog component at /blog */}
+      {/* Route for Blog page */}
       <Route path="/blog" element={<Blog />} />
 
-      {/* Render Appointments component at /appointments */}
+      {/* Route for listing Appointments */}
       <Route path="/appointments" element={<Appointments />} />
 
-      {/* Render AddAppointment component at /appointments/add */}
+      {/* Route for adding a new Appointment */}
       <Route path="/appointments/add" element={<AddAppointment />} />
 
-      {/* Render Login component at /login */}
+      {/* Route for Login page */}
       <Route path="/login" element={<Login />} />
 
-      {/* Render Register component at /register */}
+      {/* Route for Register page */}
       <Route path="/register" element={<Register />} />
-    </Routes>
-  );
-}
+      </Routes>
+    );
+  }
