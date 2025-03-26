@@ -1,73 +1,64 @@
-// src/App.tsx
-// Import required modules and components
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './pages/LoginPage';
-import Register from './pages/RegisterPage';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import PrivateRoute from './components/layout/PrivateRoute';
+
+// Layout Components
+import Navigation from './components/layout/Navigation';
+import Footer from './components/layout/Footer';
+
+// Page Components
+import Home from './pages/Home';
+import Services from './pages/Services';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
+import Booking from './pages/Booking';
 import Dashboard from './pages/Dashboard';
-import BookSession from './pages/BookSession';
-import Home from './pages/HomePage';
-import SessionList from './pages/SessionListPage';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import About from './pages/About';
 
-// Wrapper component to protect routes that require authentication
-const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-  // Check for token in localStorage to determine if user is logged in
-  const isAuthenticated = !!localStorage.getItem('token');
-
-  // If authenticated, render the child route; else redirect to login
-  return isAuthenticated ? children : <Navigate to="/" />;
-};
-
-function App() {
+/**
+ * Main App component that sets up routing and authentication
+ * Wraps the entire application in the AuthProvider for global auth state
+ * Sets up all main routes for the MindVision coaching application
+ */
+const App = () => {
   return (
-    // Wrap everything inside React Router
-    <Router>
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<Login />} />               {/* Login page */}
-        <Route path="/register" element={<Register />} />    {/* Registration page */}
-        <Route path="/home" element={<Home />} />            {/* Public homepage */}
-
-        {/* Protected Routes (require login) */}
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/book"
-          element={
-            <ProtectedRoute>
-              <BookSession />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/sessions"
-          element={
-            <ProtectedRoute>
-              <SessionList />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div className="app-container">
+          {/* Global Navigation */}
+          <Navigation />
+          
+          {/* Main Content Area */}
+          <main className="main-content">
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:id" element={<BlogPost />} />
+              <Route path="/booking" element={<Booking />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              
+              {/* Protected Routes - Require Authentication */}
+              <Route path="/dashboard" element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              } />
+            </Routes>
+          </main>
+          
+          {/* Global Footer */}
+          <Footer />
+        </div>
+      </Router>
+    </AuthProvider>
   );
-}
-
-
-<Route path="/home" element={<HomePage />} />
-<Route path="/sessions" element={
-  <ProtectedRoute>
-    <SessionListPage />
-  </ProtectedRoute>
-} />
-
-
-<Route path="/about" element={<AboutPage />} />
-<Route path="/sessions" element={<ProtectedRoute><SessionListPage /></ProtectedRoute>} />
-<Route path="/availability" element={<ProtectedRoute><SetAvailability /></ProtectedRoute>} />
+};
 
 export default App;
