@@ -1,93 +1,217 @@
+/* Root container */
 .services-container {
   padding: 5rem 5%;
   background-color: var(--light);
 }
 
-.coaching-approach h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  text-align: center;
-  margin-bottom: 3rem;
-  color: var(--secondary);
-}
-
-.approach-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.approach-card {
-  background-color: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-  width: 100%;
-  max-width: 350px;
-  padding: 2rem;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.approach-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1);
-}
-
-.card-icon {
-  font-size: 3rem;
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.approach-card h3 {
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-  color: var(--secondary);
-  text-align: center;
-}
-
-.approach-card p {
-  text-align: center;
-  font-size: 1rem;
-}
-
+/* Section Titles */
+.services-header,
+.pricing-section,
+.benefits-section,
 .cta-section {
-  padding: 5rem 5%;
   text-align: center;
-  background-color: white;
+  margin-bottom: 4rem;
 }
 
+.services-header h1,
+.pricing-section h2,
+.benefits-section h2,
 .cta-section h2 {
   font-family: 'Playfair Display', serif;
   font-size: 2.5rem;
-  margin-bottom: 1rem;
   color: var(--secondary);
+  margin-bottom: 1rem;
 }
 
+.services-tagline,
 .cta-section p {
-  max-width: 600px;
-  margin: 0 auto 2rem;
   font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
   color: var(--primary);
-  font-weight: 500;
 }
 
-.cta-button {
+/* Common container properties for alignment */
+.pricing-cards,
+.benefits-container {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 2rem !important;
+  width: 90% !important;
+  max-width: 1200px !important;
+  margin: 0 auto 5rem !important;
+  padding: 0 !important;
+}
+
+/* === PRICING SECTION === */
+.pricing-card {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+  padding: 2rem;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  background-color: var(--accent);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+.pricing-card-header h3 {
+  color: var(--secondary);
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-amount {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.pricing-period {
+  color: var(--text);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.pricing-features ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+.pricing-features li {
+  margin-bottom: 0.5rem;
+}
+
+.pricing-cta {
+  display: inline-block;
+  margin-top: 1rem;
   background-color: var(--secondary);
   color: white;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  padding: 0.6rem 1.2rem;
   font-weight: 600;
-  font-size: 1rem;
+  border-radius: 4px;
+  text-decoration: none;
   transition: background-color 0.3s;
 }
 
-.cta-button:hover {
+.pricing-cta:hover {
   background-color: var(--primary);
 }
 
+/* === BENEFITS SECTION === */
+.benefit-item {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.07);
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.benefit-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+
+.benefit-item h3 {
+  color: var(--secondary);
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.benefit-item p {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+/* Consistent responsive styles for both sections */
+@media (max-width: 1200px) {
+  .pricing-cards,
+  .benefits-container {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-cards,
+  .benefits-container {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* === CTA SECTION FINAL === */
+.cta-section {
+  padding: 5rem 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+  margin: 6rem auto 0;
+  max-width: 900px;
+  border-radius: 12px;
+}
+
+.cta-content {
+  text-align: center;
+}
+
+.cta-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--secondary);
+  margin-bottom: 1rem;
+}
+
+.cta-content p {
+  font-size: 1.15rem;
+  color: var(--text);
+  margin-bottom: 2.2rem;
+  max-width: 600px;
+  margin-inline: auto;
+  line-height: 1.6;
+}
+
+.cta-content .highlight {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: var(--primary);
+  color: white;
+  font-size: 1rem;
+  padding: 0.9rem 2.2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-button:hover {
+  background-color: var(--secondary);
+  transform: translateY(-2px);
+}

@@ -1,20 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
-
-:root {
-  --primary: #3a6ea5;
-  --secondary: #004e98;
-  --accent: #ff6b6b;
-  --light: #f8f9fa;
-  --dark: #343a40;
-  --text: #212529;
+@media (max-width: 1100px) {
+  /* Responsive styling for medium screens */
+  .benefits-container {
+    justify-content: center;
+  }
+  
+  .benefit-item {
+    flex-basis: calc(50% - 2rem);
+    margin: 1rem auto;
+  }
 }
 
+@media (max-width: 768px) {
+  /* Responsive styling for small screens */
+  .hero-content {
+    flex-direction: column;
+  }
+  
+  .hero-text {
+    padding-right: 0;
+    margin-bottom: 2rem;
+  }
+  
+  .benefit-item {
+    flex-basis: 100%;
+    max-width: 400px;
+    margin: 1rem auto;
+  }
+}/* Import Google Fonts - Montserrat for body text and Playfair Display for headings */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
+
+/* CSS Variables for consistent color scheme throughout the site */
+:root {
+  --primary: #3a6ea5;    /* Primary blue color */
+  --secondary: #004e98;  /* Darker blue for emphasis */
+  --accent: #ff6b6b;     /* Accent color for attention */
+  --light: #f8f9fa;      /* Light background color */
+  --dark: #343a40;       /* Dark color for contrast */
+  --text: #212529;       /* Main text color */
+}
+
+/* Reset default browser styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Base body styles */
 body {
   font-family: 'Montserrat', sans-serif;
   line-height: 1.6;
@@ -22,10 +54,12 @@ body {
   background-color: var(--light);
 }
 
+/* Main container that wraps all content */
 .home-container {
   width: 100%;
 }
 
+/* Hero section - full height landing area with gradient background */
 .hero-section {
   min-height: 100vh;
   padding: 80px 5% 40px;
@@ -34,6 +68,7 @@ body {
   background: linear-gradient(135deg, rgba(0,78,152,0.05) 0%, rgba(58,110,165,0.1) 100%);
 }
 
+/* Content container for the hero section - uses flexbox for responsive layout */
 .hero-content {
   display: flex;
   width: 100%;
@@ -43,11 +78,13 @@ body {
   justify-content: space-between;
 }
 
+/* Left side of hero with heading and call-to-action */
 .hero-text {
   flex: 1;
   padding-right: 2rem;
 }
 
+/* Main headline styling with elegant serif font */
 .hero-text h1 {
   font-family: 'Playfair Display', serif;
   font-size: 3rem;
@@ -55,12 +92,14 @@ body {
   color: var(--secondary);
 }
 
+/* Subtitle text below main heading */
 .hero-subtitle {
   font-size: 1.2rem;
   margin-bottom: 2rem;
   max-width: 600px;
 }
 
+/* Call-to-action button styling */
 .cta-button {
   background-color: var(--primary);
   color: white;
@@ -70,43 +109,49 @@ body {
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
 
+/* Button hover state - darkens slightly */
 .cta-button:hover {
   background-color: var(--secondary);
 }
 
+/* Right side of hero containing the profile image */
 .hero-image {
   flex: 1;
   display: flex;
   justify-content: center;
 }
 
+/* Circular container for profile image */
 .profile-circle {
   width: 350px;
   height: 350px;
   border-radius: 50%;
   overflow: hidden;
-  border: 8px solid white;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  background-color: #e9ecef;
+  border: 8px solid white; /* White border around circle */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+  background-color: #e9ecef; /* Fallback color if image fails to load */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* Image styling to ensure proper fit in circle */
 .profile-circle img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Ensures image covers area without distortion */
 }
 
+/* About section styling - white background with padding */
 .about-section {
   padding: 5rem 5%;
   background-color: white;
 }
 
+/* About section heading */
 .about-section h2 {
   font-family: 'Playfair Display', serif;
   font-size: 2.5rem;
@@ -115,16 +160,78 @@ body {
   color: var(--secondary);
 }
 
+/* Content container for about text */
 .about-content {
   max-width: 800px;
   margin: 0 auto;
+  margin-bottom: 3rem; /* Reduced space between About and Approach sections */
 }
 
+/* Paragraph styling within about text */
 .about-text p {
   margin-bottom: 1.5rem;
   font-size: 1.1rem;
 }
 
+/* Coaching Approach / Benefits section styling */
+.benefits-section {
+  margin-top: 2rem; /* Reduced space above the Approach section */
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0,0,0,0.05); /* Subtle divider between sections */
+}
+
+/* Container for the 3-column layout */
+.benefits-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows responsive column layout */
+  justify-content: flex-start; /* Align to the left to create space on the right */
+  gap: 2.5rem; /* Space between columns for better readability */
+  max-width: 75%; /* Reduce the width to create space on the right */
+  margin: 0 auto 0 0; /* Align container to the left */
+  padding-left: 5%; /* Add padding to match other sections */
+}
+
+/* Individual benefit/approach card styling */
+.benefit-item {
+  flex: 1;
+  min-width: 300px;
+  max-width: 350px;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Subtle shadow for depth */
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover animation */
+  margin: 0 auto; /* Center the cards */
+}
+
+/* Hover effect for benefit items - slight lift and enhanced shadow */
+.benefit-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* Emoji icon styling for benefit items */
+.benefit-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Benefit item heading style */
+.benefit-item h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--secondary);
+}
+
+/* Benefit item paragraph text */
+.benefit-item p {
+  font-size: 1rem;
+  color: var(--text);
+}
+
+/* Quote section with purple background */
 .quote-section {
   padding: 5rem 5%;
   background-color: rgb(131, 60, 163);
@@ -132,6 +239,7 @@ body {
   text-align: center;
 }
 
+/* Quote styling - larger elegant font */
 .quote {
   max-width: 800px;
   margin: 0 auto 2rem;
@@ -141,27 +249,32 @@ body {
   line-height: 1.4;
 }
 
+/* Quote paragraph styling */
 .quote p {
   margin-bottom: 1rem;
 }
 
+/* Quote attribution styling */
 .quote footer {
   font-size: 1.2rem;
   font-weight: 500;
   font-family: 'Montserrat', sans-serif;
 }
 
+/* Loading state text for quote */
 .loading {
   font-size: 1.2rem;
   margin-bottom: 2rem;
 }
 
+/* Error message styling */
 .error {
   color: var(--accent);
   margin-bottom: 1rem;
   font-weight: 500;
 }
 
+/* Quote refresh button - semi-transparent with border */
 .refresh-quote {
   background-color: rgba(34, 88, 211, 0.2);
   color: white;
@@ -170,9 +283,10 @@ body {
   border-radius: 4px;
   cursor: pointer;
   font-weight: 500;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s; /* Smooth hover transition */
 }
 
+/* Refresh button hover state */
 .refresh-quote:hover {
   background-color: rgba(255, 255, 255, 0.3);
 }

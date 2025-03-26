@@ -1,26 +1,21 @@
 // src/pages/Services.tsx
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Services.css';
 
-/**
- * Services Component
- * ------------------
- * Displays coaching services, pricing plans, and approach with a CTA
- * to redirect clients to the registration page.
- */
 export default function Services() {
   return (
     <div className="services-container">
-      {/* Services Header */}
+      {/* Header */}
       <div className="services-header">
-        <h1>My Services</h1>
+        <h1>Services</h1>
         <p className="services-tagline">
           Personalized coaching solutions to transform your mindset and achieve your goals
         </p>
       </div>
 
-      {/* Pricing Plans */}
+      {/* Pricing Cards */}
       <div className="pricing-section">
         <h2>Coaching Programs</h2>
         <div className="pricing-cards">
@@ -101,37 +96,6 @@ export default function Services() {
         </div>
       </div>
 
-      {/* Coaching Approach Section */}
-      <div className="coaching-approach">
-        <h2>My Coaching Approach</h2>
-        <div className="approach-cards">
-          <div className="approach-card">
-            <div className="card-icon">🧠</div>
-            <h3>Mindset Transformation</h3>
-            <p>
-              Identify and reframe limiting beliefs that hold you back from
-              reaching your full potential.
-            </p>
-          </div>
-          <div className="approach-card">
-            <div className="card-icon">🎯</div>
-            <h3>Strategic Goal Setting</h3>
-            <p>
-              Create meaningful goals with clear action steps aligned with your
-              values and aspirations.
-            </p>
-          </div>
-          <div className="approach-card">
-            <div className="card-icon">⚡</div>
-            <h3>Sustainable Growth</h3>
-            <p>
-              Develop habits and systems that support long-term success and
-              continued personal evolution.
-            </p>
-          </div>
-        </div>
-      </div>
-
       {/* Benefits Section */}
       <div className="benefits-section">
         <h2>How You'll Benefit</h2>
@@ -161,9 +125,13 @@ export default function Services() {
 
       {/* CTA Section */}
       <div className="cta-section">
-        <h2>Ready to Transform Your Life?</h2>
-        <p>Take the first step toward becoming your best self today.</p>
-        <Link to="/register" className="cta-button">Begin Your Journey Now</Link>
+        <div className="cta-content">
+          <h2>Ready to Transform Your Life?</h2>
+          <p>
+            <span className="highlight">Take the first step</span> toward becoming your best self today.
+          </p>
+          <Link to="/register" className="cta-button">Begin Your Journey Now</Link>
+        </div>
       </div>
     </div>
   );

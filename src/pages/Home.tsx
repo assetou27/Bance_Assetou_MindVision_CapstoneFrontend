@@ -1,26 +1,23 @@
-// src/pages/Home.tsx
-
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // 🧭 Enables programmatic routing
+import { useNavigate } from 'react-router-dom';
 import '../styles/Home.css';
 
+// Shape of quote from API
 interface Quote {
   content: string;
   author: string;
 }
 
 export default function Home() {
-  const navigate = useNavigate(); // 📦 React Router hook for navigation
+  const navigate = useNavigate();
   const [quote, setQuote] = useState<Quote | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // 🔁 Fetch a random quote from API
+  // Fetch quote from quotable API
   const fetchQuote = async () => {
     try {
       const response = await fetch('http://api.quotable.io/quotes/random');
-      if (!response.ok) {
-        throw new Error('Failed to fetch quote');
-      }
+      if (!response.ok) throw new Error('Failed to fetch quote');
       const data = await response.json();
       setQuote(data[0]);
     } catch (err: any) {
@@ -28,24 +25,20 @@ export default function Home() {
     }
   };
 
-  // 📅 Fetch quote on component mount
+  // Load quote on mount
   useEffect(() => {
     fetchQuote();
   }, []);
 
   return (
     <div className="home-container">
-      {/* 💬 Hero Section */}
+      {/* 👋 Hero Section */}
       <div className="hero-section">
         <div className="hero-content">
           <div className="hero-text">
             <h1>Welcome to MindVision Coaching</h1>
             <p className="hero-subtitle">Empower yourself with inspiration!</p>
-            {/* 🔗 Button that routes to login page */}
-            <button
-              className="cta-button"
-              onClick={() => navigate('/login')}
-            >
+            <button className="cta-button" onClick={() => navigate('/login')}>
               Book Your Free Consultation
             </button>
           </div>
@@ -57,7 +50,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 📌 About Section */}
+      {/* 📘 About Section */}
       <div className="about-section">
         <h2>About My Coaching</h2>
         <div className="about-content">
@@ -75,9 +68,40 @@ export default function Home() {
             </p>
           </div>
         </div>
+
+        {/* 💎 Coaching Approach Section (NEW) */}
+        <div className="benefits-section">
+          <h2>My Coaching Approach</h2>
+          <div className="benefits-container">
+            <div className="benefit-item">
+              <div className="benefit-icon">🧠</div>
+              <h3>Mindset Transformation</h3>
+              <p>
+                Identify and reframe limiting beliefs that hold you back from
+                reaching your full potential.
+              </p>
+            </div>
+            <div className="benefit-item">
+              <div className="benefit-icon">🎯</div>
+              <h3>Strategic Goal Setting</h3>
+              <p>
+                Create meaningful goals with clear action steps aligned with your
+                values and aspirations.
+              </p>
+            </div>
+            <div className="benefit-item">
+              <div className="benefit-icon">⚡</div>
+              <h3>Sustainable Growth</h3>
+              <p>
+                Develop habits and systems that support long-term success and
+                continued personal evolution.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* ✨ Quote Section */}
+      {/* 💬 Quote Section */}
       <div className="quote-section">
         {error && <p className="error">{error}</p>}
         {quote ? (

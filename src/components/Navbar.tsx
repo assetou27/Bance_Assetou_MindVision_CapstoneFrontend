@@ -1,21 +1,24 @@
 // src/components/Navbar.tsx
+
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../hooks/UserContext';
 import '../styles/Navbar.css';
 
 export default function Navbar() {
-  // Get current user and logout function from UserContext
+  // Get current user object and logout function from UserContext
   const { user, logout } = useContext(UserContext);
-  // useNavigate allows programmatic navigation (redirection)
+
+  // Hook to navigate programmatically (e.g., redirect after logout)
   const navigate = useNavigate();
-  // State to track mobile menu open/closed
+
+  // Track whether mobile menu is open or closed
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Function to handle logout: clear user state and redirect to home page
+  // Handle user logout: clear auth state and go to homepage
   const handleLogout = () => {
-    logout();       // Clear the user from context and localStorage
-    navigate('/');  // Redirect the user back to the home page
+    logout();       // Clear user state and remove token
+    navigate('/');  // Redirect to home
   };
 
   // Toggle mobile menu open/closed
@@ -23,7 +26,7 @@ export default function Navbar() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Close menu when a link is clicked (mobile only)
+  // Close mobile menu when any link is clicked
   const closeMenu = () => {
     if (isMenuOpen) setIsMenuOpen(false);
   };
@@ -31,39 +34,47 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        {/* Link back to the Home page */}
+        {/* Logo / brand link - always shows */}
         <div className="navbar-brand">
           <Link to="/" onClick={closeMenu}>MindVision</Link>
         </div>
 
-        {/* Mobile menu toggle button */}
+        {/* Hamburger icon for mobile menu toggle */}
         <div className="menu-icon" onClick={toggleMenu}>
           <span className={isMenuOpen ? 'menu-icon-bar open' : 'menu-icon-bar'}></span>
           <span className={isMenuOpen ? 'menu-icon-bar open' : 'menu-icon-bar'}></span>
           <span className={isMenuOpen ? 'menu-icon-bar open' : 'menu-icon-bar'}></span>
         </div>
 
-        {/* Navigation links - with conditional active class for mobile */}
+        {/* Navigation links - adapt to screen size */}
         <ul className={isMenuOpen ? 'navbar-links active' : 'navbar-links'}>
+          {/* Always visible links */}
           <li>
-            {/* Always show Home link */}
             <Link to="/" onClick={closeMenu}>Home</Link>
           </li>
+          <li>
+            <Link to="/services" onClick={closeMenu}>Services</Link>
+          </li>
+          <li>
+            <Link to="/blog" onClick={closeMenu}>Blog</Link>
+          </li>
+
+          {/* Conditional links based on auth status */}
           {user ? (
-            // If user is logged in, show additional links for Dashboard and Profile, plus Logout button
             <>
+              {/* Only visible when logged in */}
               <li>
-                <Link to="/dashboard" onClick={closeMenu}>Dashboard</Link>
+                <Link to="/appointments" onClick={closeMenu}>Appointments</Link>
               </li>
               <li>
-                <Link to="/profile" onClick={closeMenu}>Profile</Link>
+                <Link to="/appointments/add" onClick={closeMenu}>Add Appointment</Link>
               </li>
               <li>
-                <button 
+                <button
                   onClick={() => {
                     closeMenu();
                     handleLogout();
-                  }} 
+                  }}
                   className="logout-button"
                 >
                   Logout
@@ -71,10 +82,15 @@ export default function Navbar() {
               </li>
             </>
           ) : (
-            // If user is not logged in, show the Login link
-            <li>
-              <Link to="/login" onClick={closeMenu}>Login</Link>
-            </li>
+            <>
+              {/* Only visible when logged out */}
+              <li>
+                <Link to="/login" onClick={closeMenu}>Login</Link>
+              </li>
+              <li>
+                <Link to="/register" onClick={closeMenu}>Register</Link>
+              </li>
+            </>
           )}
         </ul>
       </div>
