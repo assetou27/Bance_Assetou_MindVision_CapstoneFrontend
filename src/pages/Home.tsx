@@ -16,7 +16,7 @@ export default function Home() {
   // Fetch quote from quotable API
   const fetchQuote = async () => {
     try {
-      const response = await fetch('http://api.quotable.io/quotes/random');
+      const response = await fetch('https://api.quotable.io/quotes/random');
       if (!response.ok) throw new Error('Failed to fetch quote');
       const data = await response.json();
       setQuote(data[0]);
