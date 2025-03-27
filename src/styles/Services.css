@@ -1,10 +1,14 @@
-/* Root container */
 .services-container {
-  padding: 5rem 5%;
+  /* Instead of padding: 5rem 5%, we use a fixed max-width + auto margin 
+     to avoid horizontal overflow on wide screens. */
   background-color: var(--light);
+  max-width: 1400px;       /* The container won’t exceed 1400px in width */
+  margin: 0 auto;          /* Centers the container horizontally */
+  padding: 5rem 2rem;      /* Vertical and horizontal padding */
+  box-sizing: border-box;  /* Ensures padding is included in total width */
 }
 
-/* Section Titles */
+/* =============== SECTION HEADINGS =============== */
 .services-header,
 .pricing-section,
 .benefits-section,
@@ -31,19 +35,17 @@
   color: var(--primary);
 }
 
-/* Common container properties for alignment */
-.pricing-cards,
-.benefits-container {
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
-  gap: 2rem !important;
-  width: 90% !important;
-  max-width: 1200px !important;
-  margin: 0 auto 5rem !important;
-  padding: 0 !important;
+/* =============== PRICING SECTION =============== */
+.pricing-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  max-width: 1200px;        /* The grid won’t exceed 1200px */
+  margin: 0 auto 5rem;      /* Centered and spaced from bottom */
+  padding: 0 2rem;          /* Horizontal padding so cards aren’t flush against screen edges */
+  box-sizing: border-box;
 }
 
-/* === PRICING SECTION === */
 .pricing-card {
   background-color: white;
   border-radius: 16px;
@@ -118,7 +120,17 @@
   background-color: var(--primary);
 }
 
-/* === BENEFITS SECTION === */
+/* =============== BENEFITS SECTION =============== */
+.benefits-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  max-width: 2400px;       /* The grid won’t exceed 1200px */
+  margin: 0 auto 5rem;     /* Centered and spaced from bottom */
+  padding: 0 2rem;         /* Horizontal padding so boxes aren’t flush against screen edges */
+  box-sizing: border-box;
+}
+
 .benefit-item {
   background-color: white;
   padding: 2rem;
@@ -147,22 +159,7 @@
   color: var(--text);
 }
 
-/* Consistent responsive styles for both sections */
-@media (max-width: 1200px) {
-  .pricing-cards,
-  .benefits-container {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .pricing-cards,
-  .benefits-container {
-    grid-template-columns: 1fr !important;
-  }
-}
-
-/* === CTA SECTION FINAL === */
+/* =============== CTA SECTION =============== */
 .cta-section {
   padding: 5rem 2rem;
   background-color: #ffffff;
@@ -214,4 +211,19 @@
 .cta-button:hover {
   background-color: var(--secondary);
   transform: translateY(-2px);
+}
+
+/* =============== RESPONSIVE BREAKPOINTS =============== */
+@media (max-width: 1200px) {
+  .pricing-cards,
+  .benefits-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-cards,
+  .benefits-container {
+    grid-template-columns: 1fr;
+  }
 }

@@ -7,18 +7,19 @@ import '../styles/AddAppointment.css';
 export default function AddAppointment() {
   // Local state for the appointment form
   const [formData, setFormData] = useState({
-    date: '',
-    time: '',
-    description: '',
+    date: '',        // e.g. "2025-04-29"
+    time: '',        // e.g. "11:30"
+    description: '', // e.g. "Consultation about goals"
   });
 
   // Error or success message
   const [message, setMessage] = useState<string | null>(null);
-
   const navigate = useNavigate();
 
   // Update form data on input changes
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 

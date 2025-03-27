@@ -6,10 +6,8 @@ import '../styles/Appointments.css';
 
 interface Appointment {
   _id: string;
-  date: string;
-  time: string;
-  description: string;
-  // Add more fields if your backend returns them
+  date: string;  // stored as an ISO string from the backend
+  notes: string; // we renamed 'description' to 'notes'
 }
 
 export default function Appointments() {
@@ -24,14 +22,13 @@ export default function Appointments() {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        // Adjust endpoint if your backend is different
+        // GET /api/appointments
         const response = await api.get('/api/appointments');
         setAppointments(response.data);
       } catch (err: any) {
         setError('Failed to fetch appointments.');
       }
     };
-
     fetchAppointments();
   }, []);
 
@@ -45,19 +42,29 @@ export default function Appointments() {
       <h1>Appointments</h1>
       {error && <p className="error">{error}</p>}
 
-      {/* Button to add a new appointment */}
       <button className="add-appointment-btn" onClick={handleAddAppointment}>
         + Add Appointment
       </button>
 
-      {/* Display the list of appointments */}
       <div className="appointments-list">
-        {appointments.map((appt) => (
-          <div key={appt._id} className="appointment-card">
-            <h2>{appt.date} at {appt.time}</h2>
-            <p>{appt.description}</p>
-          </div>
-        ))}
+        {appointments.map((appt) => {
+          // Convert the ISO date to a local date/time
+          const dateObj = new Date(appt.date);
+          const dateStr = dateObj.toLocaleDateString();
+          const timeStr = dateObj.toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+
+          return (
+            <div key={appt._id} className="appointment-card">
+              <h2>
+                {dateStr} at {timeStr}
+              </h2>
+              <p>{appt.notes}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
