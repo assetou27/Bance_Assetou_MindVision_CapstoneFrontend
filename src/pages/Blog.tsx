@@ -36,6 +36,7 @@ export default function Blog() {
       try {
         // Adjust endpoint if your backend route is different
         const response = await api.get('/api/blog');
+        console.log(response.data);
         setPosts(response.data);
       } catch (err: any) {
         setError('Failed to fetch blog posts.');
@@ -57,7 +58,7 @@ export default function Blog() {
         {posts.map((post) => (
           <div key={post._id} className="blog-card">
             <h2>{post.title}</h2>
-            {post.author && <p>by {post.author}</p>}
+            {post.author && <p>by {post.author.name}</p>}
             <p>{post.content}</p>
           </div>
         ))}
