@@ -31,11 +31,11 @@
 
 /* CSS Variables for consistent color scheme throughout the site */
 :root {
-  --primary: #3a6ea5;    /* Primary blue color */
-  --secondary: #004e98;  /* Darker blue for emphasis */
-  --accent: #ff6b6b;     /* Accent color for attention */
-  --light: #f8f9fa;      /* Light background color */
-  --dark: #343a40;       /* Dark color for contrast */
+  --primary: #3a6ea5;   
+  --secondary: #004e98;  
+  --accent: #ff6b6b;     
+  --light: #f8f9fa;      /
+  --dark: #343a40;       
   --text: #212529;       /* Main text color */
 }
 

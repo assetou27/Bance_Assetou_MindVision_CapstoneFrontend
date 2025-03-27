@@ -1,7 +1,6 @@
 // src/App.tsx
 import React from 'react';
 // BrowserRouter is used to enable routing using the HTML5 History API.
-// It wraps your entire application so that navigation between pages happens on the client side.
 import { BrowserRouter } from 'react-router-dom';
 
 // Import your custom routes component (renamed as AppRoutes) which defines all the application routes.
@@ -27,7 +26,7 @@ import { UserProvider } from './hooks/UserContext';
  */
 export default function App() {
   return (
-    // BrowserRouter ensures that your app can use the routing features provided by react-router-dom.
+    // BrowserRouter ensures that app can use the routing features provided by react-router-dom.
     <BrowserRouter>
       {/* UserProvider makes the authentication state (user data, login/logout functions) available to all nested components */}
       <UserProvider>

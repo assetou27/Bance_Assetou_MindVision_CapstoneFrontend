@@ -1,54 +1,60 @@
-# React + TypeScript + Vite
+# MindVision Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the **MindVision** coaching platform frontend! This React application provides the user interface for registration, login, booking appointments, viewing services, and more.
 
-Currently, two official plugins are available:
+## Table of Contents
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Available Scripts](#available-scripts)
+- [Folder Structure](#folder-structure)
+- [Environment Variables](#environment-variables)
+- [Deployment](#deployment)
+- [Contact](#contact)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Overview
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**MindVision Frontend** is built with React (using [Create React App](https://create-react-app.dev/) or Vite—whichever you used), React Router for client-side routing, and Axios for API calls. Users can:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **Register** for an account or **log in**.
+- **Book appointments** (protected route).
+- **View and manage** services and blog posts.
+- **Explore** coaching packages.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The UI is styled with custom CSS, Bootstrap
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Key Features
+
+1. **Authentication**: Users can sign up, log in, and log out.
+2. **Appointments**: Create and view appointments if authenticated.
+3. **Services**: Display various coaching packages and benefits.
+4. **Responsive Design**: Looks good on both desktop and mobile.
+5. **Protected Routes**: Certain pages require a valid JWT token to access.
+
+---
+
+## Tech Stack
+
+- **React** (create-react-app or Vite-based)
+- **React Router** for routing
+- **Axios** for HTTP requests
+- **CSS** (or Sass/Bootstrap) for styling
+
+---
+## Trello and typescript were used
+
+
+## Netlify
+https://abmindvision.netlify.app/
+
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/YourUser/MindVision_CapstoneFrontend.git
+   cd MindVision_CapstoneFrontend
+

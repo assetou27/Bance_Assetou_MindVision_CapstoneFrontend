@@ -1,10 +1,9 @@
 // src/pages/Blog.tsx
 import React, { useEffect, useState } from 'react';
-import api from '../services/api'; // Your Axios instance for backend calls
-import '../styles/Blog.css';      // CSS for this page
+import api from '../services/api'; // Axios instance for backend calls
+import '../styles/Blog.css'; 
 
 /**
- * Interface for a single blog post as returned by your backend.
  * Adjust the fields to match your actual data (e.g., 'title', 'content', 'author').
  */
 interface BlogPost {

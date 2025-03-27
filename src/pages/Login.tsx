@@ -2,7 +2,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../hooks/UserContext';
-import '../styles/Login.css'; // Import your custom CSS design
+import '../styles/Login.css'; 
 
 /**
  * Login Component

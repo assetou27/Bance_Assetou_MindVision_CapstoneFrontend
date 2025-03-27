@@ -7,7 +7,7 @@ import '../styles/Appointments.css';
 interface Appointment {
   _id: string;
   date: string;  // stored as an ISO string from the backend
-  notes: string; // we renamed 'description' to 'notes'
+  notes: string; // renamed 'description' to 'notes'
 }
 
 export default function Appointments() {
