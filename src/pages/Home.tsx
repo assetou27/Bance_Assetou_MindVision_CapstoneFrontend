@@ -13,12 +13,14 @@ export default function Home() {
   const [quote, setQuote] = useState<Quote | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // Fetch quote from quotable API
+  // Fetch quote from quotable API (using HTTPS to avoid mixed-content issues)
   const fetchQuote = async () => {
     try {
-      const response = await fetch('http://api.quotable.io/quotes/random');
+      // This endpoint returns an array with one quote object
+      const response = await fetch('https://api.quotable.io/quotes/random');
       if (!response.ok) throw new Error('Failed to fetch quote');
       const data = await response.json();
+      // data is an array of length 1, so we use data[0]
       setQuote(data[0]);
     } catch (err: any) {
       setError(err.message);
